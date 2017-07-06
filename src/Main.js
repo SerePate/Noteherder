@@ -5,14 +5,23 @@ import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 
-const Main = () => {
-  return(
+const Main = (props) => {
+  return (
     <div className="Main">
-      <Sidebar />  
-      <NoteList />
-      <NoteForm />
-      </div>
-    )
+      <Sidebar
+        resetCurrentNote={props.resetCurrentNote}
+      />
+      <NoteList
+        notes={props.notes}
+        setCurrentNote={props.setCurrentNote}
+      />
+      <NoteForm
+        currentNote={props.currentNote}
+        saveNote={props.saveNote}
+        removeCurrentNote={props.removeCurrentNote}
+      />
+    </div>
+  )
 }
 
 export default Main

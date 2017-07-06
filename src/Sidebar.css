@@ -37,13 +37,13 @@
   opacity: 0;
 }
 
-.Sidebar .SignOut {
+.SignOut {
   position: absolute;
   bottom: 1rem;
 }
-.Sidebar .SignOut button {
+.SignOut button {
   outline: none;
 }
-.Sidebar .SignOut button i.fa {
+.SignOut button i.fa {
   font-size: 2rem;
 }
