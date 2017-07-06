@@ -2,6 +2,7 @@ import React from 'react'
 
 import Note from './Note'
 import './NoteList.css'
+import NoteForm from './NoteForm'
 
 const NoteList=()=>{
     return(
@@ -51,9 +52,9 @@ const NoteList=()=>{
               </li>
             </a>
           </ul>
+            <NoteForm />
         </div>
-          <NoteForm />
-        </div>
+
         
     )
 }
