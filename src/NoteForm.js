@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import './NoteForm.css'
 
+
 class NoteForm extends Component {
   handleChanges = (ev) => {
     const note = {...this.props.currentNote}
