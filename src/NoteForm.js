@@ -2,7 +2,8 @@ import React from 'react'
 
 import './NoteForm.css'
 
-const NoteForm=()=>{
+class NoteForm extends React.Component{
+  render(){
     return(
         <div className="NoteForm">
             <div className="form-actions">
@@ -24,6 +25,6 @@ const NoteForm=()=>{
         </div>
         
     )
+  }
 }
-
 export default NoteForm
