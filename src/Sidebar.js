@@ -30,6 +30,7 @@ const Sidebar = ({ resetCurrentNote, SignOut }) => {
       </a>
       <div className="SignOut">
         <button onClick={signOut}>
+          
           <i className="fa fa-sign-out"></i>
         </button>
       </div>

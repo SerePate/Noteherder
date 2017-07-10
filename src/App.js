@@ -65,12 +65,15 @@ class App extends Component {
     return this.state.uid
   }
 
-  handleAuth = () => {
+  handleAuth = (result) => {
+    console.log(result)
     this.setState(uid: 'serepate')
   }
 
   signOut =() => {
-    this.setState(uid: null)
+    auth
+      .signOut()
+      .then(() => this.setState(uid: null))
   }
 
   render() {
