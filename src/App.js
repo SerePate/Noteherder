@@ -15,6 +15,18 @@ class App extends Component {
       currentNote: this.blankNote(),
     }
   }
+  componentWillMout = () =>{
+    auth.onAuthStateChanged(
+      (user) => {
+        if(user){
+          //signed in
+        }
+        else{
+          //signed out
+        }
+      }
+    )
+  }
   componentDidMount = () => {
     base.syncState(
       'notes',
