@@ -4,6 +4,7 @@ import base from './base'
 
 import './App.css'
 import Main from './Main'
+import SignIn from './SignIn'
 
 class App extends Component {
   constructor() {
@@ -60,6 +61,18 @@ class App extends Component {
     this.resetCurrentNote()
   }
 
+  signedIn = () => {
+    return this.state.uid
+  }
+
+  handleAuth = () => {
+    this.setState(uid: 'serepate')
+  }
+
+  signOut =() => {
+    this.setState(uid: null)
+  }
+
   render() {
     const actions = {
       setCurrentNote: this.setCurrentNote,
@@ -75,10 +88,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Main
-          {...actions}
-          {...noteData}
-        />
+        this.signedIn() 
+        ? <Main {...noteData}{...actions}/> 
+        : <SignIn handleAuth = {this.handleAuth}/>
+
       </div>
     );
   }
