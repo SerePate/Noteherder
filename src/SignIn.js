@@ -3,11 +3,13 @@ import React from 'react'
 import './SignIn.css'
 import quill from './quill.svg'
 import googleLogo from './google.svg'
-import { auth, googleProvider } from './base'
+import githublogo from './githublogo.svg'
+import { auth, googleProvider, githubProvider} from './base'
 
 const SignIn = () => {
   const authenticate = () => {
     auth.signInWithPopup(googleProvider)
+    auth.signInWithPopup(githubProvider)
   }
 
   return (
@@ -19,7 +21,6 @@ const SignIn = () => {
       <main>
         <h3>Hey, Nerd! You Like Notes?</h3>
         <p>You never know when you'll need to write crap down. In fact, you should probably be taking notes right now.</p>
-        
         <button
           className="google"
           onClick={authenticate}
@@ -27,9 +28,15 @@ const SignIn = () => {
           <img src={googleLogo} alt="" />
           Sign in with Google
         </button>
+        <button
+          className='github'
+          onClick={authenticate}
+        >
+          <img src={githublogo} alt="" />
+          Sign in with github
+        </button>
       </main>
     </div>
   )
 }
-
 export default SignIn
