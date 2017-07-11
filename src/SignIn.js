@@ -33,7 +33,7 @@ const SignIn = () => {
           onClick={authenticate}
         >
           <img src={githublogo} alt="" />
-          Sign in with github
+          Sign in with GitHub
         </button>
       </main>
     </div>
