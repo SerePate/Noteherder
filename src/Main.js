@@ -16,13 +16,17 @@ const Main = (props) => {
 
   return (
     <div className="Main">
-      <Sidebar signOut={props.signOut} />
-      <NoteList notes={props.notes} />
+      <Sidebar
+        signOut={props.signOut}
+      />
+      <NoteList
+        notes={props.notes}
+      />
 
       <Switch>
         <Route
           path="/notes/:id"
-          render={(navProps) => (
+          render={navProps => (
             <NoteForm
               {...formProps}
               {...navProps}
@@ -31,7 +35,7 @@ const Main = (props) => {
         />
 
         <Route
-          render={(navProps) => (
+          render={navProps => (
             <NoteForm
               {...formProps}
               {...navProps}
@@ -39,8 +43,6 @@ const Main = (props) => {
           )}
         />
       </Switch>
-
-      
     </div>
   )
 }

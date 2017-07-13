@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
-import base, { auth } from './base'
 import Main from './Main'
 import SignIn from './SignIn'
+import base, { auth } from './base'
 
 class App extends Component {
   constructor() {
     super()
 
     this.state = {
-      notes:  {},
+      notes: {},
       uid: null,
       firebaseNotesSynced: false,
     }
@@ -48,3 +48,101 @@ class App extends Component {
       }
     )
   }
+
+  saveNote = (note) => {
+    let shouldRedirect = false
+    if (!note.id) {
+      note.id = Date.now()
+      shouldRedirect = true
+    }
+
+    const notes = {...this.state.notes}
+    notes[note.id] = note
+
+    this.setState({ notes })
+
+    if (shouldRedirect) {
+      this.props.history.push(`/notes/${note.id}`)
+    }
+  }
+
+  removeNote = (note) => {
+    const notes = {...this.state.notes}
+    notes[note.id] = null
+
+    this.setState({ notes })
+    this.props.history.push('/notes')
+  }
+
+  signedIn = () => {
+    return this.state.uid
+  }
+
+  handleAuth = (user) => {
+    localStorage.setItem('uid', user.uid)
+    this.setState(
+      { uid: user.uid },
+      this.syncNotes
+    )
+  }
+
+  handleUnauth = () => {
+    localStorage.removeItem('uid')
+    if (this.bindingRef) {
+      base.removeBinding(this.bindingRef)
+    }
+
+    this.setState({
+      uid: null,
+      notes: {},
+    })
+  }
+
+  signOut = () => {
+    auth.signOut()
+  }
+
+  renderMain() {
+    const actions = {
+      saveNote: this.saveNote,
+      removeNote: this.removeNote,
+      signOut: this.signOut,
+    }
+
+    return (
+      <Main
+        {...actions}
+        notes={this.state.notes}
+        firebaseNotesSynced={this.state.firebaseNotesSynced}
+      />
+    )
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Switch>
+          <Route
+            path="/sign-in"
+            render={() => (
+              this.signedIn()
+                ? <Redirect to="/notes" />
+                : <SignIn />
+            )}
+          />
+          <Route
+            path="/notes"
+            render={() => (
+              this.signedIn()
+                ? this.renderMain()
+                : <Redirect to="/sign-in" />
+            )}
+          />
+          <Route render={() => <Redirect to="/notes" /> } />
+        </Switch>
+      </div>
+    );
+  }
+}
+
+export default App

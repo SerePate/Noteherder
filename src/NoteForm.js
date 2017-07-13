@@ -52,9 +52,17 @@ class NoteForm extends Component {
     note.body = editorValue.toString('html')
     this.setState(
       { note, editorValue },
-      () => this.props.saveNote(note)
+      () => this.props.saveNote(note),
     )
   }
+
+  // saveChanges =()=>{
+  //   const note = {...this.state.note}
+  //   this.setState(
+  //     {note},
+  //     () => this.props.updatedAt(note)
+  //   )
+  // }
 
   render() {
     return (
