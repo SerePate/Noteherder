@@ -4,6 +4,10 @@ import './NoteList.css'
 import Note from './Note'
 
 const NoteList = ({ notes }) => {
+  const sortNotes = (a, b) => {
+    return(notes[b].updatedAt || 0) - (notes[a].updatedAt || 0)
+  }
+  
   const noteIds = Object.keys(notes)
 
   return (
