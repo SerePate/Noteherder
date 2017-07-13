@@ -56,13 +56,13 @@ class NoteForm extends Component {
     )
   }
 
-  // saveChanges =()=>{
-  //   const note = {...this.state.note}
-  //   this.setState(
-  //     {note},
-  //     () => this.props.updatedAt(note)
-  //   )
-  // }
+  updateChanges = (ev, note) => {
+    note[ev.target.name] = ev.target.save
+    this.setState(
+      {note},
+      () => this.props.updatedAt(note)
+    )
+  }
 
   render() {
     return (
@@ -83,6 +83,7 @@ class NoteForm extends Component {
               placeholder="Title your note"
               value={this.state.note.title}
               onChange={this.handleChanges}
+              save={this.updateChanges}
             />
           </p>
           
@@ -90,6 +91,7 @@ class NoteForm extends Component {
             name="body"
             value={this.state.editorValue}
             onChange={this.handleEditorChanges}
+            save={this.updateChanges}
           ></RichTextEditor>
         </form>
       </div>
