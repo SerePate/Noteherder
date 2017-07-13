@@ -13,9 +13,14 @@ class NoteForm extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const nextId = nextProps.currentNoteId
-    const note = nextProps.notes[nextId] || this.blankNote()
+    const idFromUrl = nextProps.match.params.id
+    const note = nextProps.notes[idFromUrl] || this.blankNote()
 
+    const noteNotFound = idFromUrl && !note.id
+    if (noteNotFound && nextProps.firebaseNotesSynced) {
+      this.props.history.replace('/notes')
+    }
+    
     let editorValue = this.state.editorValue
     if (editorValue.toString('html') !== note.body) {
       editorValue = RichTextEditor.createValueFromString(note.body, 'html')
@@ -35,11 +40,11 @@ class NoteForm extends Component {
   handleChanges = (ev) => {
     const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
-
     this.setState(
       { note },
       () => this.props.saveNote(note)
     )
+    
   }
 
   handleEditorChanges = (editorValue) => {
@@ -51,17 +56,13 @@ class NoteForm extends Component {
     )
   }
 
-  handleRemove = () => {
-    this.props.removeNote(this.state.note)
-  }
-
   render() {
     return (
       <div className="NoteForm">
         <div className="form-actions">
           <button
             type="button"
-            onClick={this.handleRemove}
+            onClick={() => this.props.removeNote(this.state.note)}
           >
             <i className="fa fa-trash-o"></i>
           </button>

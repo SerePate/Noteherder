@@ -1,12 +1,13 @@
 {
   "name": "noteherder",
-  "homepage": "http://serepate.github.io./Noteherder",
+  "homepage": "https://notehearder.firebaseapp.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "re-base": "^3.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
     "react-rte": "^0.11.0"
   },
   "devDependencies": {
@@ -19,6 +20,6 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "firebase deploy"
   }
 }

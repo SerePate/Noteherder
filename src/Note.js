@@ -1,15 +1,9 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const Note = ({ note, setCurrentNoteId }) => {
-  const handleClick = () => {
-    setCurrentNoteId(note.id)
-  }
-
+const Note = ({ note }) => {
   return (
-    <a
-      className="active"
-      onClick={handleClick}
-    >
+    <NavLink to={`/notes/${note.id}`}>
       <li>
         <div className="note">
           <div className="note-title">
@@ -18,11 +12,10 @@ const Note = ({ note, setCurrentNoteId }) => {
           <div
             className="note-body"
             dangerouslySetInnerHTML={{ __html: note.body }}
-          >
-          </div>
+          ></div>
         </div>
       </li>
-    </a>
+    </NavLink>
   )
 }
 
